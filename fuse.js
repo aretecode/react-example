@@ -17,8 +17,8 @@ const babelConfig = {
 // http://fuse-box.org/#shimming
 // http://fuse-box.org/#custom-modules-folder
 var aliases = {
-  'moose': './src/modules/moose.js',
-  'eh': './src/modules/eh.js',
+  'moose': './src/moose.js',
+  'eh': './src/eh.js',
 }
 var shim = {}
 Object.keys(aliases).forEach(alias => {
@@ -30,10 +30,12 @@ Object.keys(aliases).forEach(alias => {
 var fuseBox = new fsbx.FuseBox({
   // using modules folder or not does not make a difference
   // or if the modules folder has sub folders or an index
-  modulesFolder: 'src/modules',
+  // modulesFoldaer: 'src/modules',
 
   shim,
-  serverBundle: true,
+
+  // is for electron
+  serverBundle: false,
   cache: false,
   homeDir: 'src/',
   sourceMap: {
@@ -42,7 +44,9 @@ var fuseBox = new fsbx.FuseBox({
   },
   outFile: './build/out.js',
   plugins: [
-    fsbx.BabelPlugin(babelConfig),
+    fsbx.BabelPlugin({
+      config: babelConfig,
+    })
   ]
 })
 
@@ -51,24 +55,24 @@ var fuseBox = new fsbx.FuseBox({
 // - or when building bundle for node being required
 //
 // fuseBox.devServer('>index.js');
-fuseBox.bundle('>index.js').then(() => {
+fuseBox.bundle('>index.js', () => {
   console.log('bundled')
-
+  require('./build/out.js')
   // is either silently caught or is hijacked
   // var cmd = 'node ./build/out.js'
   // execSync(cmd, {stdio: 'inherit'})
 })
 
-setTimeout(() => {
-  console.log('running...')
-
-  // get nothing
-  var cmd = 'node ./build/out.js'
-  execSync(cmd)
-
-  console.log('...done running')
-
-  // @NOTE: debugging only
-  // just to require simply after timeout to log
-  eval('var eh = require("./build/out.js"); console.log(eh);')
-}, 1000)
+// setTimeout(() => {
+//   console.log('running...')
+//
+//   // get nothing
+//   var cmd = 'node ./build/out.js'
+//   execSync(cmd)
+//
+//   console.log('...done running')
+//
+//   // @NOTE: debugging only
+//   // just to require simply after timeout to log
+//   eval('var eh = require("./build/out.js"); console.log(eh);')
+// }, 1000)
