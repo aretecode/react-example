@@ -1,30 +1,32 @@
-const fsbx = require("fuse-box");
+const fsbx = require('fuse-box');
 
 const babelConfig = {
-  "sourceMaps": true,
-  "presets": ["latest"],
-  "plugins": [
-    "transform-react-jsx",
-    "transform-object-rest-spread",
-    "transform-decorators-legacy",
-    "transform-class-properties"
+  'sourceMaps': true,
+  'presets': ['latest'],
+  'plugins': [
+    'transform-react-jsx',
+    'transform-object-rest-spread',
+    'transform-decorators-legacy',
+    'transform-class-properties'
   ]
 }
 
 // Create FuseBox Instance
 let fuseBox = new fsbx.FuseBox({
   cache: false,
-  homeDir: "src/",
+  homeDir: 'src/',
   sourceMap: {
-    bundleReference: "sourcemaps.js.map",
-    outFile: "./build/sourcemaps.js.map",
+    bundleReference: 'sourcemaps.js.map',
+    outFile: './build/sourcemaps.js.map',
   },
-  outFile: "./build/out.js",
+  outFile: './build/out.js',
   plugins: [
-    fsbx.SVGPlugin(),
-    fsbx.CSSPlugin(),
-    fsbx.BabelPlugin(babelConfig)
+    // fsbx.SVGPlugin(),
+    // fsbx.CSSPlugin(),
+    // fsbx.HTMLPlugin({useDefault: true}),
+    fsbx.BabelPlugin(babelConfig),
   ]
 });
 
-fuseBox.devServer(">index.js");
+// same with index.js
+fuseBox.devServer('>igloo.js');

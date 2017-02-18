@@ -1,15 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App.jsx';
-import './index.css';
+// same results if the contents of igloo are in here
+import './igloo.js'
 
-function decorator(target) {
-  return class Canada extends target {}
-}
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import App from './App.js';
+// import './index.css';
 
-@decorator
-class Eh extends React.Component {
-  state = {}
-}
+// function decorator(target) {
+//   return class Canada extends target {}
+// }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// @decorator
+// class Eh extends React.Component {
+//   state = {}
+// }
+
+// ReactDOM.render(<App />, document.getElementById('root'));
