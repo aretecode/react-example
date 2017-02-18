@@ -1,18 +1,14 @@
-// same results if the contents of igloo are in here
-import './igloo.js'
+// if these import directly,
+// it does not make a difference,
+// so aliasing does seem to work :-)
+import moosed from 'moose'
+var moose = require('moose')
 
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import App from './App.js';
-// import './index.css';
+// this does work
+require('eh')
 
-// function decorator(target) {
-//   return class Canada extends target {}
-// }
+console.log('moose, moosed')
+console.log(moose)
+console.log(moosed)
 
-// @decorator
-// class Eh extends React.Component {
-//   state = {}
-// }
-
-// ReactDOM.render(<App />, document.getElementById('root'));
+// moose('es')
